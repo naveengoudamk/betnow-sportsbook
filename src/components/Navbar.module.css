@@ -1,0 +1,74 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(11, 14, 20, 0.85);
+    /* Slightly clearer background */
+    backdrop-filter: blur(16px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.link {
+    color: var(--color-text-dim);
+    font-weight: 600;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.link:hover,
+.link.active {
+    color: var(--color-text-main);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Indicator dot for active/hover */
+.link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    width: 4px;
+    height: 4px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+
+.link:hover::after,
+.link.active::after {
+    transform: translateX(-50%) scale(1);
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .navLinks {
+        display: none;
+    }
+}
