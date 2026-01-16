@@ -15,7 +15,15 @@ export default function Casino() {
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
-                    {['Roulette Royale', 'Blackjack VIP', 'Cyber Slots', 'Poker Tournament', 'Baccarat Live', 'Crypto Crash'].map((game, i) => (
+                    {[
+                        { name: 'Roulette Royale', color: '#ff4757', icon: '🎡' },
+                        { name: 'Blackjack VIP', color: '#2e86de', icon: '♠️' },
+                        { name: 'Ludo Supreme', color: '#f0932b', icon: '🎲' },
+                        { name: 'Cyber Slots', color: '#00ff88', icon: '🎰' },
+                        { name: 'Poker Tournament', color: '#feca57', icon: '🃏' },
+                        { name: 'Baccarat Live', color: '#ff9ff3', icon: '🎴' },
+                        { name: 'Crypto Crash', color: '#54a0ff', icon: '📉' }
+                    ].map((game, i) => (
                         <div key={i} className="glass-panel" style={{
                             borderRadius: '16px',
                             overflow: 'hidden',
@@ -24,15 +32,15 @@ export default function Casino() {
                         }}>
                             <div style={{
                                 height: '180px',
-                                background: `linear-gradient(45deg, ${['#ff4757', '#2e86de', '#00ff88', '#feca57', '#ff9ff3', '#54a0ff'][i]} 0%, #151a23 100%)`,
+                                background: `linear-gradient(45deg, ${game.color} 0%, #151a23 100%)`,
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center'
                             }}>
-                                <span style={{ fontSize: '3rem', opacity: 0.5 }}>🎰</span>
+                                <span style={{ fontSize: '3rem', opacity: 0.8 }}>{game.icon}</span>
                             </div>
                             <div style={{ padding: '1.5rem' }}>
-                                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem' }}>{game}</h3>
+                                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem' }}>{game.name}</h3>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <span style={{ fontSize: '0.85rem', color: 'var(--color-text-dim)' }}>
                                         {Math.floor(Math.random() * 5000) + 100} Players
