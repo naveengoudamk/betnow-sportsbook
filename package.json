@@ -1,6 +1,7 @@
 {
-  "name": "betnow",
-  "version": "0.1.0",
+  "name": "betnow-premium-sportsbook",
+  "version": "1.0.0",
+  "description": "A premium, high-performance sports betting and casino web application built with Next.js 14, featuring real-time odds, dark glassmorphism UI, and live updates.",
   "private": true,
   "scripts": {
     "dev": "next dev",
