@@ -1,19 +1,21 @@
-# BetNow - Premium Sports Betting & Casino Platform
+# CricketBet - Live Cricket Betting Platform
 
 ![Project Status](https://img.shields.io/badge/status-active-success.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-14-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 
-**BetNow** is a state-of-the-art web application designed for the modern sports bettor. Featuring a sleek **Dark Glassmorphism** aesthetic, real-time odds displays, and an immersive casino experience, it sets a new standard for online betting interfaces.
+**CricketBet** is a specialized cricket betting platform featuring real-time match scores, live odds, and in-play betting markets. Built with a stunning **Dark Glassmorphism** aesthetic, it delivers an immersive cricket betting experience for fans worldwide.
 
 ## 🚀 Key Features
 
-*   **🏆 Live Sports Dashboard**: dynamically updated match cards with "Live" pulsation effects.
-*   **🎰 Premium Casino**: A dedicated section for high-stakes games like Roulette, Poker, and Slots.
-*   **🎨 Glassmorphism UI**: Beautiful, translucent surfaces with neon accents (`#00ff88`, `#00d2ff`) for a futuristic feel.
-*   **⚡ High Performance**: Built on Next.js 14 for server-side rendering and lightning-fast page loads.
-*   **📱 Fully Responsive**: Optimized for mobile, tablet, and desktop viewing.
+*   **🏏 Live Cricket Scores**: Real-time match updates from CricketData API
+*   **📊 Dynamic Odds**: Live betting odds that update every 5 seconds
+*   **⚡ In-Play Betting**: Next ball predictions (Six, Four, Wicket, Dot Ball)
+*   **� Ball-by-Ball Tracking**: Visual representation of current over with color-coded balls
+*   **🎨 Glassmorphism UI**: Beautiful, translucent surfaces with neon accents (`#00ff88`, `#60efff`)
+*   **🔄 Auto-Refresh**: Match data refreshes every 30 seconds
+*   **📱 Fully Responsive**: Optimized for mobile, tablet, and desktop viewing
 
 ## 🛠️ Technology Stack
 
@@ -45,12 +47,25 @@ Follow these instructions to get the project up and running on your local machin
     npm install
     ```
 
-3.  **Run the development server:**
+3.  **Configure Cricket API (Optional):**
+    ```bash
+    # Copy the example environment file
+    cp .env.example .env.local
+    ```
+    
+    Get a free API key from [CricketData.org](https://www.cricketdata.org/) and add it to `.env.local`:
+    ```
+    CRICKET_API_KEY=your_api_key_here
+    ```
+    
+    *Note: The app will work with sample data if no API key is provided.*
+
+4.  **Run the development server:**
     ```bash
     npm run dev
     ```
 
-4.  **Open your browser:**
+5.  **Open your browser:**
     Navigate to [http://localhost:3000](http://localhost:3000) to see the app in action.
 
 ## 📁 Project Structure
@@ -73,10 +88,14 @@ betnow/
 
 ## 🔮 Future Roadmap
 
-*   [ ] **Backend Integration**: Connect to Node.js/Express for user management.
-*   [ ] **Live Data Feed**: Integrate SportRadar or OddsAPI for real-time match data.
-*   [ ] **Bet Slip**: Create a shopping-cart style ticket for placing bets.
-*   [ ] **Wallet**: Implement crypto (USDT/BTC) and fiat payment gateways.
+*   [x] **Live Cricket API**: Integrated CricketData API for real-time match data
+*   [x] **In-Play Betting**: Next ball predictions with live odds
+*   [ ] **User Authentication**: Complete phone/email authentication system
+*   [ ] **Bet Slip**: Cricket-specific bet slip with multiple market support
+*   [ ] **Tournament Coverage**: IPL, World Cup, T20 leagues, Test series
+*   [ ] **Player Statistics**: Detailed player stats and head-to-head comparisons
+*   [ ] **Wallet Integration**: UPI, Paytm, and cryptocurrency payment options
+*   [ ] **Live Streaming**: Integrate live match streaming (where available)
 
 ---
-*Built with ❤️ by the BetNow Development Team*
+*Built with ❤️ for Cricket Fans Worldwide*
