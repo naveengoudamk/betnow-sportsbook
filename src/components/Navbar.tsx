@@ -20,14 +20,14 @@ export default function Navbar() {
         <>
             <nav className={styles.navbar}>
                 <Link href="/" className={`${styles.logo} text-gradient`}>
-                    BetNow
+                    🏏 CricketBet
                 </Link>
 
                 <div className={styles.navLinks}>
-                    <Link href="/" className={`${styles.link} ${styles.active}`}>Sports</Link>
-                    <Link href="/live" className={styles.link}>In-Play</Link>
-                    <Link href="/casino" className={styles.link}>Casino</Link>
-                    <Link href="/esports" className={styles.link}>Esports</Link>
+                    <Link href="/" className={`${styles.link} ${styles.active}`}>Live Matches</Link>
+                    <Link href="/upcoming" className={styles.link}>Upcoming</Link>
+                    <Link href="/tournaments" className={styles.link}>Tournaments</Link>
+                    <Link href="/results" className={styles.link}>Results</Link>
                 </div>
 
                 <div className={styles.actions}>

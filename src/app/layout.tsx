@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "BetNow - Premium Sports Betting",
-  description: "The ultimate platform for live sports betting and casino games.",
+  title: "CricketBet - Live Cricket Betting",
+  description: "Experience real-time cricket betting with live scores, dynamic odds, and in-play markets for all major cricket tournaments.",
 };
 
 export default function RootLayout({
