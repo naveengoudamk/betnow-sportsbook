@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 // CricketData API endpoint
 const CRICKET_API_URL = 'https://api.cricapi.com/v1';
-const API_KEY = process.env.CRICKET_API_KEY || 'demo'; // You'll need to get a free API key from cricketdata.org
+const API_KEY = process.env.CRICKET_API_KEY || 'demo';
 
 export async function GET() {
     try {
@@ -23,7 +23,7 @@ export async function GET() {
         // Filter for live matches and format the data
         const liveMatches = data.data
             ?.filter((match: any) => match.matchStarted && !match.matchEnded)
-            .slice(0, 5) // Limit to 5 matches
+            .slice(0, 5)
             .map((match: any) => {
                 // Parse score data
                 const team1Score = match.score?.[0] || {};
@@ -46,8 +46,10 @@ export async function GET() {
                     overs2: team2Score.o ? `${team2Score.o}` : undefined,
                     matchType: match.matchType || 'ODI',
                     venue: match.venue || '',
-                    // Generate realistic odds based on scores
+                    // Generate realistic odds and ratios
                     odds: generateOdds(team1Score, team2Score, match.matchType),
+                    ratios: generateRatios(team1Score, team2Score),
+                    sessions: generateSessions(team1Score),
                     inPlayOdds: generateInPlayOdds()
                 };
             }) || [];
@@ -82,8 +84,6 @@ export async function GET() {
 // Generate realistic odds based on current match situation
 function generateOdds(team1Score: any, team2Score: any, matchType: string) {
     const hasDrawOdds = matchType?.toLowerCase().includes('test');
-
-    // Simple odds calculation based on runs
     const team1Runs = parseInt(team1Score.r) || 0;
     const team2Runs = parseInt(team2Score.r) || 0;
 
@@ -105,7 +105,35 @@ function generateOdds(team1Score: any, team2Score: any, matchType: string) {
     };
 }
 
-// Generate in-play betting odds
+// Generate realistic Back/Lay ratios (Indian Market Style)
+function generateRatios(team1Score: any, team2Score: any) {
+    const t1r = parseInt(team1Score.r) || 0;
+    const t2r = parseInt(team2Score.r) || 0;
+
+    // Base ratio calculation
+    let base = 80;
+    if (t1r > t2r) base = 60 + Math.floor(Math.random() * 10);
+    else base = 90 + Math.floor(Math.random() * 10);
+
+    return {
+        team1: { back: base, lay: base + 2 },
+        team2: { back: 100 - base - 2, lay: 100 - base }
+    };
+}
+
+// Generate Session/Lambi data
+function generateSessions(score: any) {
+    const currentRuns = parseInt(score.r) || 0;
+    const currentOvers = parseFloat(score.o) || 0;
+
+    return [
+        { name: '6 Over Session', back: Math.floor(currentRuns + 15), lay: Math.floor(currentRuns + 17) },
+        { name: '10 Over Session', back: Math.floor(currentRuns + 35), lay: Math.floor(currentRuns + 38) },
+        { name: '20 Over Session', back: Math.floor(currentRuns + 85), lay: Math.floor(currentRuns + 90) },
+        { name: 'Lambi (50 Over)', back: Math.floor(currentRuns + 210), lay: Math.floor(currentRuns + 215) }
+    ];
+}
+
 function generateInPlayOdds() {
     return {
         nextBallSix: parseFloat((7.00 + Math.random() * 3.0).toFixed(2)),
@@ -115,7 +143,6 @@ function generateInPlayOdds() {
     };
 }
 
-// Sample matches for when API is unavailable or no live matches
 function getSampleMatches() {
     return [
         {
@@ -131,10 +158,17 @@ function getSampleMatches() {
             matchType: 'ODI',
             venue: 'Mumbai',
             lastBalls: ['4', '1', '6', '0', 'W', '2'],
-            odds: {
-                team1Win: 1.85,
-                team2Win: 2.10,
+            odds: { team1Win: 1.85, team2Win: 2.10 },
+            ratios: {
+                team1: { back: 82, lay: 84 },
+                team2: { back: 118, lay: 120 }
             },
+            sessions: [
+                { name: '6 Over Session', back: 48, lay: 50 },
+                { name: '10 Over Session', back: 75, lay: 78 },
+                { name: '20 Over Session', back: 145, lay: 148 },
+                { name: 'Lambi (50 Over)', back: 310, lay: 315 }
+            ],
             inPlayOdds: {
                 nextBallSix: 8.50,
                 nextBallFour: 5.20,
@@ -156,41 +190,22 @@ function getSampleMatches() {
             matchType: 'T20',
             venue: 'Dubai',
             lastBalls: ['1', '2', '4', '1', '0', '6'],
-            odds: {
-                team1Win: 3.20,
-                team2Win: 1.35,
+            odds: { team1Win: 3.20, team2Win: 1.35 },
+            ratios: {
+                team1: { back: 320, lay: 330 },
+                team2: { back: 132, lay: 135 }
             },
+            sessions: [
+                { name: 'Match Winner England', back: 3.2, lay: 3.3 },
+                { name: 'Match Winner Pakistan', back: 1.3, lay: 1.35 }
+            ],
             inPlayOdds: {
                 nextBallSix: 7.00,
                 nextBallFour: 4.50,
                 nextBallWicket: 5.50,
                 nextBallDot: 3.20,
             }
-        },
-        {
-            id: 3,
-            team1: 'South Africa',
-            team2: 'New Zealand',
-            tournament: 'Test Match - Day 3',
-            status: 'live',
-            currentInning: '1st Innings',
-            score1: '312/8',
-            overs1: '98.4',
-            score2: 'Yet to bat',
-            matchType: 'Test',
-            venue: 'Cape Town',
-            lastBalls: ['0', '1', '0', '2', '0', '1'],
-            odds: {
-                team1Win: 2.40,
-                team2Win: 2.60,
-                draw: 3.80,
-            },
-            inPlayOdds: {
-                nextBallSix: 12.00,
-                nextBallFour: 8.00,
-                nextBallWicket: 4.20,
-                nextBallDot: 1.90,
-            }
         }
     ];
 }
+

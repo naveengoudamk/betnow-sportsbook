@@ -25,6 +25,7 @@ export default function Navbar() {
 
                 <div className={styles.navLinks}>
                     <Link href="/" className={`${styles.link} ${styles.active}`}>Live Matches</Link>
+                    <Link href="/analysis" className={styles.link}>Market Analysis</Link>
                     <Link href="/upcoming" className={styles.link}>Upcoming</Link>
                     <Link href="/tournaments" className={styles.link}>Tournaments</Link>
                     <Link href="/results" className={styles.link}>Results</Link>
