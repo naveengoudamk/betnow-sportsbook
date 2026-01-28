@@ -4,7 +4,10 @@ import { useState } from 'react';
 import styles from './Navbar.module.css';
 import AuthModal from './AuthModal';
 
+import { usePathname } from 'next/navigation';
+
 export default function Navbar() {
+    const pathname = usePathname();
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const [user, setUser] = useState<string | null>(null);
 
@@ -24,11 +27,11 @@ export default function Navbar() {
                 </Link>
 
                 <div className={styles.navLinks}>
-                    <Link href="/" className={`${styles.link} ${styles.active}`}>Live Matches</Link>
-                    <Link href="/analysis" className={styles.link}>Market Analysis</Link>
-                    <Link href="/upcoming" className={styles.link}>Upcoming</Link>
-                    <Link href="/tournaments" className={styles.link}>Tournaments</Link>
-                    <Link href="/results" className={styles.link}>Results</Link>
+                    <Link href="/" className={`${styles.link} ${pathname === '/' ? styles.active : ''}`}>Live</Link>
+                    <Link href="/analysis" className={`${styles.link} ${pathname === '/analysis' ? styles.active : ''}`}>Market Analysis</Link>
+                    <Link href="/upcoming" className={`${styles.link} ${pathname === '/upcoming' ? styles.active : ''}`}>Upcoming</Link>
+                    <Link href="/tournaments" className={`${styles.link} ${pathname === '/tournaments' ? styles.active : ''}`}>Tournaments</Link>
+                    <Link href="/results" className={`${styles.link} ${pathname === '/results' ? styles.active : ''}`}>Results</Link>
                 </div>
 
                 <div className={styles.actions}>
